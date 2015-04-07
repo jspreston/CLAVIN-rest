@@ -21,8 +21,8 @@
   <body>
     <breadcrumbs>
       <item name="CLAVIN Home" href="http://clavin.bericotechnologies.com" />
-      <item name="Berico Technologies" href="http://bericotech.com" />
-      <item name="Fork Me on GitHub" href="http://github.com/Berico-Technologies/CLAVIN" />
+      <item name="Berico Technologies" href="http://www.bericotechnologies.com" />
+      <item name="Fork Me on GitHub" href="http://github.com/Berico-Technologies/CLAVIN-rest" />
     </breadcrumbs>
     <menu>
         <item name="Overview" href="index.html" />

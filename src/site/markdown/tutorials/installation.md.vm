@@ -10,7 +10,7 @@ $H$H$H$H Package creation
     git clone https://github.com/Berico-Technologies/CLAVIN-rest
     cd CLAVIN-rest
     mvn package 
-    
+
 $H Using CLAVIN-REST
 
 This section will discuss mechanisms for quickly integrating CLAVIN with a JVM-based project.
@@ -37,12 +37,9 @@ $H$H$H$H Step 7. Geotag an article
     curl -O https://raw.githubusercontent.com/Berico-Technologies/CLAVIN/master/src/test/resources/sample-docs/Somalia-doc.txt
     curl -s --data @Somalia-doc.txt --header "Content-Type: text/plain" http://localhost:9090/api/v0/geotag
 
-If you encounter an error that looks like this:
-    ... InvocationTargetException: Java heap space ...
-set the appropriate environmental variable controlling Maven's memory usage, and increase the size with `export MAVEN_OPTS=-Xmx3g` or similar.
 
 Once that all runs successfully, feel free to modify the CLAVIN-REST source code to suit your needs, or import CLAVIN\'s functionality into your own program using the CLAVIN .jar file, found on Maven Central (http://search.maven.org/#browse%7C918955015).
 
-**Please note:** Loading the worldwide gazetteer uses a non-trivial amount of memory. When using CLAVIN in your own programs, if you encounter `Java heap space` errors (like the one described in Step 8), bump up the maximum heap size for your JVM.
+**Please note:** Loading the worldwide gazetteer uses a non-trivial amount of memory. When using CLAVIN in your own programs, if you encounter `Java heap space` errors (like the one described above), bump up the maximum heap size for your JVM.
 
 

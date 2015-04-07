@@ -9,6 +9,7 @@ Follow the [Installation](installation.html) and setup instructions for setting 
 ### Query the /geotag RESTful Endpoint
 
 The /geotag endpoint accepts a POST of data, content-type: text/plain. The data model for /geotag is: 
+
 ```
 resolvedLocations {
 geoname (Geoname),
@@ -89,6 +90,7 @@ ancestryResolved (boolean)
 ```
 
 The model schema for /geotag is:
+
 ```
 {
    resolvedLocations [
@@ -179,6 +181,7 @@ The model schema for /geotag is:
 ### Query the /geotagmin RESTful Endpoint
 
 The /geotagmin endpoint accepts a POST of data, content-type: text/plain. The data model for /geotag is: 
+
 ```
 resolvedLocations {
 geonameID (integer),
@@ -191,6 +194,7 @@ longitude (double)
 ```
 
 The model schema for /geotag is:
+
 ```
 {
    resolvedLocations [

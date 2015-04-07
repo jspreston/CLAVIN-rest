@@ -1,5 +1,6 @@
 ## Velocity comments use two hashes; so we need an alternative variable
 ## to represent Markdown headers.
+#set($H = '#')
 
 $H Installation
 

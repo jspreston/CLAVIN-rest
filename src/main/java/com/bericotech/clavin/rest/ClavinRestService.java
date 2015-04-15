@@ -14,7 +14,7 @@ import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
 import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
 import com.bericotech.clavin.GeoParser;
-import com.bericotech.clavin.nerd.StanfordExtractor;
+import com.bericotech.clavin.extractor.ApacheExtractor;
 import com.bericotech.clavin.rest.resource.ClavinRestResource;
 
 
@@ -44,10 +44,27 @@ public class ClavinRestService extends Service<ClavinRestConfiguration> {
              
         Gazetteer gazetteer = new LuceneGazetteer(new File(luceneDir));
 
-        StanfordExtractor extractor = new StanfordExtractor();  	   	
-        GeoParser parser = new GeoParser(extractor, gazetteer, maxHitDepth, maxContextWindow, false);
+        final ThreadLocal<ApacheExtractor> threadId =
+                new ThreadLocal<ApacheExtractor>() {
+                    @Override protected ApacheExtractor initialValue() {
+                        try {
+							return new ApacheExtractor();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} 
+						return null;
+                }
+            };
+        
+        GeoParser parser = new GeoParser(threadId.get(), gazetteer, maxHitDepth, maxContextWindow, false);
         
         environment.addResource(new ClavinRestResource(parser));
     }
+    
+    
+
+    
+    
 
 }

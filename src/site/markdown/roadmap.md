@@ -11,6 +11,7 @@ We are considering several updates to this package, and would like your feedback
 -  Include methods in CLAVIN that support the return of full (/geotag) or minified (/geotagmin) ResolvedLocation    
 -  Enable Streaming APIs, which will require an update to CLAVIN to support streaming. Will result in better memory management. 
 -  Incorporate a REST Documentation API for better documentation (-e.g. Swagger, RAML, etc)
+-  Add content negotiation to determine whether response is XML, JSON, etc.
 
 ### New functionality
 -  Enable integration with AWS Services for stream processing -e.g. Kinesis, CloudWatch

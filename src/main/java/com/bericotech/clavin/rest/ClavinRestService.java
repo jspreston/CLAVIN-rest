@@ -37,29 +37,8 @@ public class ClavinRestService extends Service<ClavinRestConfiguration> {
     @Override
     public void run(ClavinRestConfiguration configuration,
                     Environment environment) throws ClassCastException, ClassNotFoundException, IOException, ParseException, ClavinException {
-        final String luceneDir = configuration.getLuceneDir();
-        final Integer maxHitDepth = configuration.getMaxHitDepth();
-        final Integer maxContextWindow = configuration.getMaxContextWindow();
-        // final Boolean fuzzy = configuration.getFuzzy();
-             
-        Gazetteer gazetteer = new LuceneGazetteer(new File(luceneDir));
-
-        final ThreadLocal<ApacheExtractor> threadId =
-                new ThreadLocal<ApacheExtractor>() {
-                    @Override protected ApacheExtractor initialValue() {
-                        try {
-							return new ApacheExtractor();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} 
-						return null;
-                }
-            };
         
-        GeoParser parser = new GeoParser(threadId.get(), gazetteer, maxHitDepth, maxContextWindow, false);
-        
-        environment.addResource(new ClavinRestResource(parser));
+        environment.addResource(new ClavinRestResource(configuration));
     }
     
     

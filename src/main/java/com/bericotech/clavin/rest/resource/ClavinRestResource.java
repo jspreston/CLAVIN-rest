@@ -27,7 +27,8 @@ import com.bericotech.clavin.rest.core.ResolvedLocationsMinimum;
 public class ClavinRestResource {
     private GeoParser parser;    
     private ThreadLocal<GeoParser> threadId;
-    		
+    private Gazetteer gazetteer; 
+    
     public ClavinRestResource(ClavinRestConfiguration configuration) {
         //this.parser = parser;
         
@@ -36,11 +37,17 @@ public class ClavinRestResource {
         final Integer maxContextWindow = configuration.getMaxContextWindow();
         // final Boolean fuzzy = configuration.getFuzzy();
     
+        try {
+			gazetteer = new LuceneGazetteer(new File(luceneDir));
+		} catch (ClavinException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			gazetteer = null;
+		}
+        
         threadId = new ThreadLocal<GeoParser>() {
                     @Override protected GeoParser initialValue() {
                         try {
-                        	
-                        	Gazetteer gazetteer = new LuceneGazetteer(new File(luceneDir));
                         	
 							ApacheExtractor extractor = new ApacheExtractor();
 							
@@ -49,10 +56,7 @@ public class ClavinRestResource {
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						} catch (ClavinException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} 
+						}
 						return null;
                 }
             };

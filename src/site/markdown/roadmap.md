@@ -5,7 +5,7 @@ We are considering several updates to this package, and would like your feedback
 ### Package Updates & Alternatives
 -  Provide a Spring Boot release of CLAVIN-REST
 -  Conduct more rigorous testing and analysis of micro-services on Jetty, Tomcat vs Deployable War releases on high performance cloud environments like Amazon Web Services using load balancing.
--  Incorporate better inline comments and usage examples for javadoc.
+-  Incorporate better in-line comments and usage examples for javadoc.
 
 ### API Changes
 -  Include methods in CLAVIN that support the return of full (/geotag) or minified (/geotagmin) ResolvedLocation    

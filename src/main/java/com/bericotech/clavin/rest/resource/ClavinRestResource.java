@@ -27,16 +27,19 @@ import com.bericotech.clavin.rest.core.ResolvedLocationsMinimum;
 public class ClavinRestResource {
     private GeoParser parser;    
     private ThreadLocal<GeoParser> threadId;
-    private Gazetteer gazetteer; 
+    private Gazetteer gazetteer;
+    private String luceneDir;
+    private Integer maxHitDepth;
+    private Integer maxContextWindow;
     
     public ClavinRestResource(ClavinRestConfiguration configuration) {
         //this.parser = parser;
         
-        final String luceneDir = configuration.getLuceneDir();
-        final Integer maxHitDepth = configuration.getMaxHitDepth();
-        final Integer maxContextWindow = configuration.getMaxContextWindow();
+        luceneDir = configuration.getLuceneDir();
+        maxHitDepth = configuration.getMaxHitDepth();
+        maxContextWindow = configuration.getMaxContextWindow();
         // final Boolean fuzzy = configuration.getFuzzy();
-    
+        
         try {
 			gazetteer = new LuceneGazetteer(new File(luceneDir));
 		} catch (ClavinException e1) {
@@ -45,6 +48,20 @@ public class ClavinRestResource {
 			gazetteer = null;
 		}
         
+    }
+
+    @GET
+    public String index() {
+        return "CLAVIN-rest 0.2.0";
+    }
+    
+        
+    @POST
+    @Path("/geotag")
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response extractAndResolveSimpleLocationsFromText(String text) {
+    
         threadId = new ThreadLocal<GeoParser>() {
                     @Override protected GeoParser initialValue() {
                         try {
@@ -59,27 +76,11 @@ public class ClavinRestResource {
 						}
 						return null;
                 }
-            };
-               
-    }
-
-    @GET
-    public String index() {
-        return "CLAVIN-rest 0.1";
-    }
-    
-        
-    @POST
-    @Path("/geotag")
-    @Consumes(MediaType.TEXT_PLAIN)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response extractAndResolveSimpleLocationsFromText(String text) {
-    
-    	parser = threadId.get();
+            };    	
     	
         ResolvedLocations result = null;
         try {
-            List<ResolvedLocation> resolvedLocations = parser.parse(text);
+            List<ResolvedLocation> resolvedLocations = threadId.get().parse(text);
         result = new ResolvedLocations(resolvedLocations);
         
         } catch (Exception e) {
@@ -98,11 +99,25 @@ public class ClavinRestResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response extractAndResolveSimpleShortLocationsFromText(String text) {
     
-    	parser = threadId.get();
+        threadId = new ThreadLocal<GeoParser>() {
+            @Override protected GeoParser initialValue() {
+                try {
+                	
+					ApacheExtractor extractor = new ApacheExtractor();
+					
+					return new GeoParser(extractor, gazetteer, maxHitDepth, maxContextWindow, false);
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return null;
+            }
+        };    	
     	
         ResolvedLocationsMinimum result = null;
         try {
-            List<ResolvedLocation> resolvedLocations = parser.parse(text);
+            List<ResolvedLocation> resolvedLocations = threadId.get().parse(text);
             result = new ResolvedLocationsMinimum(resolvedLocations);
             
         

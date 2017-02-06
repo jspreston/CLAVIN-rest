@@ -79,7 +79,7 @@ function processData(data)
     	var place = new Object();
        	place.id = entry.geonameID;
        	place.name = entry.name;
-       	place.countrycode = entry.countrycode;
+       	place.countryCode = entry.countryCode;
        	place.latitude = entry.latitude;
        	place.longitude = entry.longitude;
        	
@@ -134,7 +134,7 @@ function styleResultSet(place) {
 	var source   = $("#result_template").html();
 	var template = Handlebars.compile(source);
 	
-	var context = {id: place.id, name: place.name, code: place.countrycode, lat: place.latitude, lon: place.longitude};
+	var context = {id: place.id, name: place.name, code: place.countryCode, lat: place.latitude, lon: place.longitude};
 	var html    = template(context);
 	
 	return html;  
@@ -250,15 +250,6 @@ $(document).ready(function(){
 	
 	$('#results').on('mousewheel DOMMouseScroll', function(e) {
 		if ( $('#results').css( "position" ) == 'absolute') {
-    		var d = e.originalEvent.wheelDelta || -e.originalEvent.detail,
-    	        dir = d > 0 ? 'up' : 'down',
-    	        stop = (dir == 'up' && this.scrollTop == 0) || (dir == 'down' && this.scrollTop == this.scrollHeight-this.offsetHeight);
-    	    stop && e.preventDefault();
-		}
-	});
-	
-	$('#directions').on('mousewheel DOMMouseScroll', function(e) {
-		if ( $('#directions').css( "position" ) == 'absolute') {
     		var d = e.originalEvent.wheelDelta || -e.originalEvent.detail,
     	        dir = d > 0 ? 'up' : 'down',
     	        stop = (dir == 'up' && this.scrollTop == 0) || (dir == 'down' && this.scrollTop == this.scrollHeight-this.offsetHeight);

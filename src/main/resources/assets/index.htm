@@ -57,7 +57,7 @@
 
                         <!--logo start-->
                         <a href="index.html" class="logo-brand">
-                            <img class="retina" src="img/logo-dark.png" alt="Massive">
+                            <img class="retina" src="img/clavin_logo.png" alt="CLAVIN">
                         </a>
                         <!--logo end-->
 
@@ -82,11 +82,29 @@
             <div class="container-mid">
                 <div class="container">
                     <div class="banner-title light-txt">
-                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                        <div class="m-top-100">
-                            <a href="#search" class="btn btn-medium btn-theme-border-color ">Search</a>
-                        </div>
+                    	<div class="form-group">
+							<div class="row">
+								<div id="cpanel">
+									<form id="text_search" action="#" class="form-horizontal">
+								       	<div class="col-md-9 subscription-input">
+								    		<textarea id="textstring" class="form-control" rows="8" placeholder="Search String *" required></textarea>
+								        </div>
+								        <div class="col-md-3 text-center">
+								        	<a id="search_clavin" href="#search" class="btn btn-medium btn-theme-border-color ">Search CLAVIN</a>
+		<!-- 				                   	<button type="submit" id="search_clavin" class="btn btn-medium  btn-theme-color"><i class='fa fa-search'> </i> Search CLAVIN</button> -->
+							            </div>
+							    	</form>
+						        </div>
+						    </div>                                           
+						</div>   
                     </div>
+                    
+                    
+<!--                     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> -->
+<!--                         <div class="m-top-100"> -->
+<!--                             <a href="#search" class="btn btn-medium btn-theme-border-color ">Search</a> -->
+<!--                         </div> -->
+<!--                     </div> -->
                 </div>
             </div>
         </div>
@@ -95,55 +113,72 @@
         <!--body content start-->
         <section class="body-content">
 
-            <!--feature-->
-            <div id="search" class="page-content-sm">
-                <div class="container">
-                    <!--feature border box start-->
-                    <div class="row">
-                    	<div class="m-bot-10 inline-block">
-    					<!--title-->
-							<div id='search_block'></div>
-                 		<!-- title -->
-                 		</div>
-	                    <div class="col-md-12"><!-- col-md-10 col-md-offset-1 -->
+<!--             feature -->
+<!--             <div id="search" class="page-content-sm"> -->
+<!--                 <div class="container"> -->
+<!--                     feature border box start -->
+<!--                     <div class="row"> -->
+<!--                     	<div class="m-bot-10 inline-block"> -->
+<!--     					title -->
+<!-- 							<div id='search_block'></div> -->
+<!--                  		title -->
+<!--                  		</div> -->
+<!-- 	                    <div class="col-md-12">col-md-10 col-md-offset-1 -->
 	                       		
-	                    <!--form--> 
-			            <form id="text_search" action="#" class="form-horizontal">
-			            	<div class="row">                                        
-						    	<div class="col-md-12">   
-					            	<h5 class="text-uppercase">Search CLAVIN</h5>		                            
-									<div class="form-group">
-										<div class="row">
-						                 	<div class="col-md-12 subscription-input">
-						                    	<!-- <input id="textstring" name="textstring" type="text" placeholder="Search String *" class="form-control" /> -->
-						                    	<textarea id="textstring" class="form-control" rows="15" placeholder="Search String *" required></textarea>
-						                    </div>
-						            	</div>                                           
-						        	</div>                                        			
-                            	</div>
-					       	</div>
-					        <div class="row">
-					        	<div class="form-group">
-						        	<div class="col-md-12 text-center">
-				                    	<button type="submit" id="search_clavin" class="btn btn-medium  btn-theme-color btn-rounded"><i class='fa fa-search'> </i> Search CLAVIN</button>
-					                </div>
-								</div>	
-							</div>                                        
-                        </form>
-						<!--form-->
-						</div>
-					</div>
-				</div>
-            </div>  
+<!-- 	                    form  -->
+<!-- 			            <form id="text_search" action="#" class="form-horizontal"> -->
+<!-- 			            	<div class="row">                                         -->
+<!-- 						    	<div class="col-md-12">    -->
+<!-- 					            	<h5 class="text-uppercase">Search CLAVIN</h5>		                             -->
+<!-- 									<div class="form-group"> -->
+<!-- 										<div class="row"> -->
+<!-- 						                 	<div class="col-md-12 subscription-input"> -->
+<!-- 						                    	<input id="textstring" name="textstring" type="text" placeholder="Search String *" class="form-control" /> -->
+<!-- 						                    	<textarea id="textstring" class="form-control" rows="15" placeholder="Search String *" required></textarea> -->
+<!-- 						                    </div> -->
+<!-- 						            	</div>                                            -->
+<!-- 						        	</div>                                        			 -->
+<!--                             	</div> -->
+<!-- 					       	</div> -->
+<!-- 					        <div class="row"> -->
+<!-- 					        	<div class="form-group"> -->
+<!-- 						        	<div class="col-md-12 text-center"> -->
+<!-- 				                    	<button type="submit" id="search_clavin" class="btn btn-medium  btn-theme-color btn-rounded"><i class='fa fa-search'> </i> Search CLAVIN</button> -->
+<!-- 					                </div> -->
+<!-- 								</div>	 -->
+<!-- 							</div>                                         -->
+<!--                         </form> -->
+<!-- 						form -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!--             </div>   -->
+
 
             <div class="page-content-sm" id="map-wrapper">        
-            	<div id="map-canvas"></div>
-            	<div id="results-wrapper">
-            		<div id="results">
-            			<div id="resultsList"></div>
-            		</div>
-            	</div>            	
+            	    <div class="row">  
+            			<div id="facts" class="col-md-12">
+            				<div id="factsList"></div>
+            			</div>
+            	    </div>  
+            		<div class="row">  
+            			<div id="results" class="col-md-4">
+            				<div id="resultsList"></div>
+            			</div>
+            			<div id="map-canvas" class="col-md-8"></div>
+            	    </div>  	
             </div>
+
+
+<!--             <div class="page-content-sm" id="map-wrapper">         -->
+            	
+<!--             	<div id="map-canvas"></div> -->
+<!--             	<div id="results-wrapper"> -->
+<!--             		<div id="results"> -->
+<!--             			<div id="resultsList"></div> -->
+<!--             		</div> -->
+<!--             	</div>            	 -->
+<!--             </div> -->
             <!--feature-->
 
         </section>
@@ -156,9 +191,9 @@
                     <div class="row">
                         <div class="col-md-4">
                             <a href="#" class="m-bot-20 footer-logo">
-                                <img class="retina" src="img/logo-dark.png" alt="" />
+                                <img class="retina" src="img/logo_small.png" alt="" />
                             </a>
-                            <p>Massive is fully responsible, Performance oriented and SEO optimized theme.</p>
+                            <p>An open source geoparser that enables advanced geospatial analytics on big data by extracting & resolving geographic entities from unstructured text.</p>
 
                         </div>
                         <div class="col-md-4">

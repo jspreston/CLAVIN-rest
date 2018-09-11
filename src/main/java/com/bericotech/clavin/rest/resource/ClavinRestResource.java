@@ -1,5 +1,15 @@
 package com.bericotech.clavin.rest.resource;
 
+import com.bericotech.clavin.GeoParser;
+import com.bericotech.clavin.extractor.LocationExtractor;
+import com.bericotech.clavin.extractor.LocationOccurrence;
+import com.bericotech.clavin.gazetteer.query.Gazetteer;
+import com.bericotech.clavin.resolver.ClavinLocationResolver;
+import com.bericotech.clavin.resolver.ResolvedLocation;
+import com.bericotech.clavin.rest.core.ResolvedLocations;
+import com.bericotech.clavin.rest.core.ResolvedLocationsMinimum;
+
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -8,18 +18,24 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
-import com.bericotech.clavin.GeoParser;
-import com.bericotech.clavin.resolver.ResolvedLocation;
-import com.bericotech.clavin.rest.core.ResolvedLocations;
-import com.bericotech.clavin.rest.core.ResolvedLocationsMinimum;
+import java.util.stream.Collectors;
 
 @Path("/v0")
 @Produces(MediaType.APPLICATION_JSON)
 public class ClavinRestResource {
-    private final GeoParser parser;    
+    private final GeoParser parser;
+    private final ClavinLocationResolver resolver;
+    private int maxHitDepth;
+    private int maxContextWindow;
+    private boolean fuzzy;
 
-    public ClavinRestResource(GeoParser parser) {
-        this.parser = parser;
+    public ClavinRestResource(LocationExtractor extractor, Gazetteer gazetteer, int maxHitDepth, int maxContextWindow, boolean fuzzy) {
+
+        this.parser = new GeoParser(extractor, gazetteer, maxHitDepth, maxContextWindow, fuzzy);
+        this.resolver = new ClavinLocationResolver(gazetteer);
+        this.maxHitDepth = maxHitDepth;
+        this.maxContextWindow = maxContextWindow;
+        this.fuzzy = fuzzy;
     }
 
     @GET
@@ -69,7 +85,28 @@ public class ClavinRestResource {
         return Response.status(200).entity(result).build();
         
     }
-    
-    
+
+    @POST
+    @Path("/resolve")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response disambiguate(List<LocationMention> locationMentions) {
+
+        ResolvedLocationsMinimum result = null;
+        List<LocationOccurrence> locationOccurences = locationMentions.stream()
+                .map(loc -> new LocationOccurrence(loc.text, loc.position))
+                .collect(Collectors.toList());
+        try {
+            List<ResolvedLocation> resolvedLocations = resolver.resolveLocations(locationOccurences, this.maxHitDepth, this.maxContextWindow, this.fuzzy);
+            result = new ResolvedLocationsMinimum(resolvedLocations);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.status(500).entity(e).build();
+        }
+
+        return Response.status(200).entity(result).build();
+    }
+
     
 }

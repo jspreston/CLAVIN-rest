@@ -76,6 +76,14 @@
                     </archive>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -158,23 +166,23 @@
     </plugins>
   </reporting>
   
-    <repositories>
-    <repository>
-      <id>berico-snapshot</id>
-      <name>Berico Snapshots</name>
-      <url>http://nexus.bericotechnologies.com/content/repositories/snapshots</url>
-      <layout>default</layout>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-    	<id>central</id>
-    	<url>http://repo1.maven.org/maven2/</url>
- 	</repository>    
-    <repository>
-    	<id>sonatype-releases</id>
-    	<url>https://oss.sonatype.org/content/repositories/releases/</url>
-    </repository>
-  </repositories>
+    <!--<repositories>-->
+    <!--<repository>-->
+      <!--<id>berico-snapshot</id>-->
+      <!--<name>Berico Snapshots</name>-->
+      <!--<url>http://nexus.bericotechnologies.com/content/repositories/snapshots</url>-->
+      <!--<layout>default</layout>-->
+      <!--<snapshots>-->
+        <!--<enabled>true</enabled>-->
+      <!--</snapshots>-->
+    <!--</repository>-->
+    <!--<repository>-->
+    	<!--<id>central</id>-->
+    	<!--<url>http://repo1.maven.org/maven2/</url>-->
+ 	<!--</repository>    -->
+    <!--<repository>-->
+    	<!--<id>sonatype-releases</id>-->
+    	<!--<url>https://oss.sonatype.org/content/repositories/releases/</url>-->
+    <!--</repository>-->
+  <!--</repositories>-->
 </project>
